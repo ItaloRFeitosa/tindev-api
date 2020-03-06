@@ -1,6 +1,17 @@
 const Dev = require('../models/Dev');
 
 module.exports = {
+
+    async index(req, res){
+        const { user } = req.headers;
+
+        const loggedDev = await Dev.findById(user);
+
+        const devs = await Dev.find({ _id: loggedDev.like});
+
+        return res.json(devs);
+    },
+
     async store(req,res){
         try {
             const { devId } = req.params;

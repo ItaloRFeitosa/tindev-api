@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 
 const server = express();
 
-mongoose.connect('mongodb+srv://italo:uBpKLuyxHBnM16kA@apimongo-6vn6x.gcp.mongodb.net/tindev?retryWrites=true&w=majority',
+// mongoose.connect('mongodb+srv://italo:uBpKLuyxHBnM16kA@apimongo-6vn6x.gcp.mongodb.net/tindev?retryWrites=true&w=majority',
+//     { useNewUrlParser: true}
+// );
+
+mongoose.connect('mongodb://localhost:27017/tindev',
     { useNewUrlParser: true}
 );
 
