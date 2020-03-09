@@ -3,13 +3,29 @@ const Dev = require('../models/Dev');
 module.exports = {
 
     async index(req, res){
-        const { user } = req.headers;
+        try {
+            
+            const { user } = req.headers;
+    
+            const loggedDev = await Dev.findById(user);
+            
+            if(loggedDev.dislikes.length == 0){
 
-        const loggedDev = await Dev.findById(user);
+                return res.json({message: "Without Dislikes"});
 
-        const devs = await Dev.find({ _id:{ $in: loggedDev.dislike}});
+            } else {
+    
+                const devs = await Dev.findById(loggedDev.dislikes);
+        
+                return res.json(devs);
 
-        return res.json(devs);
+            }
+
+        } catch (error) {
+
+            return res.status(400).json({error})
+
+        }
     },
 
     async store(req,res){
